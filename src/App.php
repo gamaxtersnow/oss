@@ -19,7 +19,12 @@ class App extends ContainerBuilder{
     private function _registerOssClient(): void
     {
         $this->register('ossClient', OssClient::class)
-            ->setArguments([$this->config->get('access_key'),$this->config->get('access_secret'),$this->config->get('end_point')]);
+            ->setArgument('accessKeyId',$this->config->get('access_key'))
+            ->setArgument('accessKeySecret',$this->config->get('access_secret'))
+            ->setArgument('endpoint',$this->config->get('end_point'))
+            ->setArgument('isCName',$this->config->get('is_cname'))
+            ->setArgument('securityToken',$this->config->get('security_token'))
+            ->setArgument('requestProxy',$this->config->get('request_proxy'));
     }
     private function _registerOss(): void
     {
