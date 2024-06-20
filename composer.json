@@ -27,7 +27,10 @@
         "think": {
             "services": [
                 "OSService\\Think\\OSService"
-            ]
+            ],
+            "config":{
+                "trace": "src/Think/config.php"
+            }
         }
     }
 }

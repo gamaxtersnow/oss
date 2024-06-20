@@ -9,7 +9,7 @@ class OSService extends Service
     {
         $config = config('oss');
         if(empty($config)) {
-            $config = require __DIR__.'/config.php';
+            $config = require __DIR__.'/oss.php';
         }
         $this->app->bind('oss', new App($config));
     }
