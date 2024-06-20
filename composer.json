@@ -17,7 +17,7 @@
     "require": {
         "php": ">=8.3.0",
         "aliyuncs/oss-sdk-php": "^2.7",
-        "symfony/dependency-injection": "^7.0",
+        "symfony/dependency-injection": "^6.0",
         "doctrine/collections": "^2.2"
     },
     "config": {
