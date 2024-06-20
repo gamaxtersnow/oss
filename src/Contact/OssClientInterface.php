@@ -22,4 +22,13 @@ interface OssClientInterface{
      * @return string|null
      */
     public function uploadStream(string $bucket, string $object,$handle, array $options = NULL): string|null;
+
+    /**
+     * 获取object 签名url
+     * @param string $bucket
+     * @param string $object
+     * @param int $expiration
+     * @return string
+     */
+    public function getObjectSignUrl(string $bucket,string $object,int $expiration):string;
 }

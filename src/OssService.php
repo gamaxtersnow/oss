@@ -42,4 +42,14 @@ class OssService implements OssClientInterface {
             return null;
         }
     }
+
+    public function getObjectSignUrl(string $bucket,string $object,int $expiration=3600): string
+    {
+        try {
+           return $this->ossClient->signUrl($bucket, $object, $expiration);
+        }catch (OssException $e){
+            Log::error($e->getMessage());
+            return '';
+        }
+    }
 }
