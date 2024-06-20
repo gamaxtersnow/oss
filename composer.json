@@ -1,0 +1,33 @@
+{
+    "name": "gamaxtersnow/oss",
+    "version": "1.0.0",
+    "description": "阿里云oss适配thinkphp",
+    "type": "library",
+    "license": "mit",
+    "authors": [
+        {
+            "name": "wuzhaohui"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "OSService\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=8.3.0",
+        "aliyuncs/oss-sdk-php": "^2.7",
+        "symfony/dependency-injection": "^7.0",
+        "doctrine/collections": "^2.2"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "think": {
+            "services": [
+                "OSService\\Think\\OSService"
+            ]
+        }
+    }
+}
