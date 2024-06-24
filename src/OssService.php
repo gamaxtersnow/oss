@@ -13,12 +13,13 @@ use think\facade\Log;
  */
 class OssService implements OssClientInterface {
     use OssClientTrait,OssBucketNameTrait;
+
     /**
      *  上传附件到阿里oss
      *
      * @param string $fileName
      * @param string $url
-     * @return string
+     * @return array|null
      */
     public function uploadMedia(string $fileName,string $url): array|null
     {
@@ -49,5 +50,9 @@ class OssService implements OssClientInterface {
             Log::error($e->getMessage());
             return '';
         }
+    }
+    public function getBucketName(): string
+    {
+        return $this->bucketName;
     }
 }
