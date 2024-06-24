@@ -1,6 +1,6 @@
 {
     "name": "gamaxtersnow/oss",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "阿里云oss适配thinkphp",
     "type": "library",
     "license": "mit",

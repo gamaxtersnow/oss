@@ -2,6 +2,7 @@
 namespace OSService;
 
 use OSService\Contact\OssClientInterface;
+use OSService\Traits\OssBucketNameTrait;
 use OSService\Traits\OssClientTrait;
 use OSS\Core\OssException;
 use OSS\Http\RequestCore_Exception;
@@ -11,19 +12,18 @@ use think\facade\Log;
  * OSS服务类
  */
 class OssService implements OssClientInterface {
-    use OssClientTrait;
+    use OssClientTrait,OssBucketNameTrait;
     /**
      *  上传附件到阿里oss
      *
-     * @param string $bucket
      * @param string $fileName
      * @param string $url
      * @return string
      */
-    public function uploadMedia(string $bucket,string $fileName,string $url): string
+    public function uploadMedia(string $fileName,string $url): string
     {
         try {
-            $res = $this->ossClient->uploadFile($bucket, $fileName, $url);
+            $res = $this->ossClient->uploadFile($this->bucketName, $fileName, $url);
             return $res['info']['url']??'';
         }catch (OssException|RequestCore_Exception $e){
             Log::error($e->getMessage());
@@ -32,10 +32,10 @@ class OssService implements OssClientInterface {
     }
 
 
-    public function uploadStream(string $bucket, string $object, $handle, array $options = NULL): string|null
+    public function uploadStream(string $object, $handle, array $options = NULL): string|null
     {
         try {
-            $res = $this->ossClient->uploadStream($bucket, $object, $handle,$options);
+            $res = $this->ossClient->uploadStream($this->bucketName, $object, $handle,$options);
             return $res['info']['url']??'';
         } catch (OssException|RequestCore_Exception $e) {
             Log::error($e->getMessage());
@@ -43,10 +43,10 @@ class OssService implements OssClientInterface {
         }
     }
 
-    public function getObjectSignUrl(string $bucket,string $object,int $expiration=3600): string
+    public function getObjectSignUrl(string $object,int $expiration=3600): string
     {
         try {
-           return $this->ossClient->signUrl($bucket, $object, $expiration);
+           return $this->ossClient->signUrl($this->bucketName, $object, $expiration);
         }catch (OssException $e){
             Log::error($e->getMessage());
             return '';

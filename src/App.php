@@ -29,6 +29,7 @@ class App extends ContainerBuilder{
     private function _registerOss(): void
     {
         $this->register('oss', OssService::class)
-            ->addMethodCall('setOssClient', [new Reference('ossClient')]);
+            ->addMethodCall('setOssClient', [new Reference('ossClient')])
+            ->addMethodCall('setOssBucket', $this->config->get('bucket_name'));
     }
 }
