@@ -41,7 +41,15 @@ class OssService implements OssClientInterface {
             return null;
         }
     }
-
+    public function putObject(string $object, string $content, array $options = NULL): array|null
+    {
+        try {
+            return  $this->ossClient->putObject($this->bucketName, $object, $content,$options);
+        } catch (OssException|RequestCore_Exception $e) {
+            Log::error($e->getMessage());
+            return null;
+        }
+    }
     public function getObjectSignUrl(string $object,int $expiration=3600): string
     {
         try {
