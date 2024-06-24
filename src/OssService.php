@@ -20,11 +20,10 @@ class OssService implements OssClientInterface {
      * @param string $url
      * @return string
      */
-    public function uploadMedia(string $fileName,string $url): string
+    public function uploadMedia(string $fileName,string $url): array|null
     {
         try {
-            $res = $this->ossClient->uploadFile($this->bucketName, $fileName, $url);
-            return $res['info']['url']??'';
+            return $this->ossClient->uploadFile($this->bucketName, $fileName, $url);
         }catch (OssException|RequestCore_Exception $e){
             Log::error($e->getMessage());
             return '';
@@ -32,11 +31,10 @@ class OssService implements OssClientInterface {
     }
 
 
-    public function uploadStream(string $object, $handle, array $options = NULL): string|null
+    public function uploadStream(string $object, $handle, array $options = NULL): array|null
     {
         try {
-            $res = $this->ossClient->uploadStream($this->bucketName, $object, $handle,$options);
-            return $res['info']['url']??'';
+            return  $this->ossClient->uploadStream($this->bucketName, $object, $handle,$options);
         } catch (OssException|RequestCore_Exception $e) {
             Log::error($e->getMessage());
             return null;

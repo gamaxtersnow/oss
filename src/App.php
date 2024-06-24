@@ -30,6 +30,6 @@ class App extends ContainerBuilder{
     {
         $this->register('oss', OssService::class)
             ->addMethodCall('setOssClient', [new Reference('ossClient')])
-            ->addMethodCall('setOssBucket', $this->config->get('bucket_name'));
+            ->addMethodCall('setOssBucket', [$this->config->get('bucket_name')]);
     }
 }
